@@ -7,6 +7,23 @@
     android:background="#FEFEFE">
 
     <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="226dp"
+        android:layout_height="265dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/fon4_2"
+        tools:layout_editor_absoluteY="507dp" />
+
+    <ImageView
+        android:id="@+id/imageView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/fon2_1" />
+
+
+    <ImageView
         android:id="@+id/imageView"
         android:layout_width="501dp"
         android:layout_height="144dp"
