@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_startFragment_to_student1"
             app:destination="@id/student1" />
+        <action
+            android:id="@+id/action_startFragment_to_teacher1"
+            app:destination="@id/teacher1" />
     </fragment>
     <fragment
         android:id="@+id/studentRegister1"
@@ -37,4 +40,9 @@
             android:id="@+id/action_student1_to_studentRegister1"
             app:destination="@id/studentRegister1" />
     </fragment>
+    <fragment
+        android:id="@+id/teacher1"
+        android:name="com.example.our_trpp_project.UI.Teacher1"
+        android:label="teacher_1"
+        tools:layout="@layout/teacher_1" />
 </navigation>

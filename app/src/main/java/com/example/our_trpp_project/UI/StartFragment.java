@@ -26,10 +26,17 @@ public class StartFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_start, container, false);
         Button button = view.findViewById(R.id.button_stud);
+        Button button1 = view.findViewById(R.id.button_rep)
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Navigation.findNavController(view).navigate(R.id.action_startFragment_to_student1);
+            }
+        });
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_startFragment_to_teacher1);
             }
         });
         return view;
