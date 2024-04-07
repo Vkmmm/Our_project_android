@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/Background_pink"
-    tools:context=".MainActivity"
+    tools:context=".UI.MainActivity"
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="48dp">
 
@@ -20,6 +20,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:defaultNavHost="true"
         app:navGraph="@navigation/navig_graph" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

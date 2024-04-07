@@ -1,4 +1,4 @@
-package com.example.our_trpp_project;
+package com.example.our_trpp_project.UI;
 
 import android.os.Bundle;
 
@@ -8,12 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.our_trpp_project.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link StudentEnter1#newInstance} factory method to
+ * Use the {@link TeacherRegister2#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class StudentEnter1 extends Fragment {
+public class TeacherRegister2 extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +26,7 @@ public class StudentEnter1 extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public StudentEnter1() {
+    public TeacherRegister2() {
         // Required empty public constructor
     }
 
@@ -34,11 +36,11 @@ public class StudentEnter1 extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment StudentEnter1.
+     * @return A new instance of fragment TeacherRegister2.
      */
     // TODO: Rename and change types and number of parameters
-    public static StudentEnter1 newInstance(String param1, String param2) {
-        StudentEnter1 fragment = new StudentEnter1();
+    public static TeacherRegister2 newInstance(String param1, String param2) {
+        TeacherRegister2 fragment = new TeacherRegister2();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -59,6 +61,6 @@ public class StudentEnter1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.student_enter_1, container, false);
+        return inflater.inflate(R.layout.teacher_register2, container, false);
     }
 }

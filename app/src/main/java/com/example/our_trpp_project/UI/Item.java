@@ -1,7 +1,7 @@
-package com.example.our_trpp_project;
+package com.example.our_trpp_project.UI;
 
 public class Item {
-    private String text;
+    private final String text;
     public Item(String text){
         this.text = text;
     }

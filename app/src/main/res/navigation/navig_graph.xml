@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/startFragment"
-        android:name="com.example.our_trpp_project.StartFragment"
+        android:name="com.example.our_trpp_project.UI.StartFragment"
         android:label="fragment_start"
         tools:layout="@layout/fragment_start" >
         <action
@@ -15,7 +15,26 @@
             app:destination="@id/student1" />
     </fragment>
     <fragment
+        android:id="@+id/studentRegister1"
+        android:name="com.example.our_trpp_project.UI.StudentRegister1"
+        android:label="student_register1"
+        tools:layout="@layout/student_register1" >
+        <action
+            android:id="@+id/action_studentRegister1_to_studentRegister2"
+            app:destination="@id/studentRegister2" />
+    </fragment>
+    <fragment
+        android:id="@+id/studentRegister2"
+        android:name="com.example.our_trpp_project.UI.StudentRegister2"
+        android:label="student_register2"
+        tools:layout="@layout/student_register2" />
+    <fragment
         android:id="@+id/student1"
-        android:name="com.example.our_trpp_project.Student1"
-        android:label="Student1" />
+        android:name="com.example.our_trpp_project.UI.Student1"
+        android:label="fragment_student1"
+        tools:layout="@layout/fragment_student1" >
+        <action
+            android:id="@+id/action_student1_to_studentRegister1"
+            app:destination="@id/studentRegister1" />
+    </fragment>
 </navigation>
