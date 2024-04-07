@@ -6,10 +6,11 @@
 ## Функциональность
 
 - Поиск репетиторов по конкретному предмету.
+  ![image](https://github.com/Vkmmm/Our_project_android/assets/153014638/7de26035-af8d-45c7-a797-873e6c8f7c3f)
 - Просмотр профилей репетиторов с подробной информацией о квалификации, опыте и отзывах от других пользователей.
-- ![image](https://github.com/Vkmmm/Our_project_android/assets/153014638/e7b6d7ee-1f36-404d-8dc7-8dc836c02ae9)
+  ![image](https://github.com/Vkmmm/Our_project_android/assets/153014638/e7b6d7ee-1f36-404d-8dc7-8dc836c02ae9)
 - Возможность записаться на занятия и общаться с репетиторами через встроенную систему сообщений.
-- ![image](https://github.com/Vkmmm/Our_project_android/assets/153014638/f081c0d1-b7e6-474b-8885-0b77af0c78b8)
+  ![image](https://github.com/Vkmmm/Our_project_android/assets/153014638/f081c0d1-b7e6-474b-8885-0b77af0c78b8)
 - Добавление репетиторов в избранное.
 - Продвижение своих услуг, привлечение новых учеников.
 
