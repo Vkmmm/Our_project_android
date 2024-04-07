@@ -30,11 +30,11 @@ public class InformationStudentRepository implements Serializable {
         RepeatPassword = repeatPassword;
     }
 
-    public int getGrade() {
+    public String getGrade() {
         return Grade;
     }
 
-    public void setGrade(int grade) {
+    public void setGrade(String grade) {
         Grade = grade;
     }
 
@@ -46,7 +46,7 @@ public class InformationStudentRepository implements Serializable {
         City = city;
     }
 
-    public InformationStudentRepository(String number, String password, String repeatPassword, String name, int grade, String city) {
+    public InformationStudentRepository(String number, String password, String repeatPassword, String name, String grade, String city) {
         Number = number;
         Password = password;
         RepeatPassword = repeatPassword;
@@ -55,23 +55,24 @@ public class InformationStudentRepository implements Serializable {
         City = city;
     }
 
-    public InformationStudentRepository(String number, String password, String repeatPassword) {
-        Number = number;
-        Password = password;
-        RepeatPassword = repeatPassword;
-    }
+
 
     private String Password;
     private String RepeatPassword;
-    private String Name;
 
-    public InformationStudentRepository(String name, int grade, String city) {
-        Name = name;
-        Grade = grade;
-        City = city;
+    public String getName() {
+        return Name;
     }
 
-    private int Grade;
+    public void setName(String name) {
+        Name = name;
+    }
+
+    private String Name;
+
+
+
+    private String Grade;
     private String City;
     public InformationStudentRepository() {}
 

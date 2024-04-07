@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.our_trpp_project.Data.InformationStudentRepository;
 import com.example.our_trpp_project.R;
@@ -17,7 +18,7 @@ import com.example.our_trpp_project.R;
 public class StudentRegister1 extends Fragment {
 
     InformationStudentRepository informationStudentRepository;
-    public Student1Fragment() {
+    public StudentRegister1() {
         super(R.layout.fragment_student1);
         informationStudentRepository = new InformationStudentRepository();
     }
@@ -36,15 +37,21 @@ public class StudentRegister1 extends Fragment {
                 String Number = editTextNumber.getText().toString();
                 String Password = editTextPassword.getText().toString();
                 String RepeatPassword = editTextRepeatPassword.getText().toString();
-                informationStudentRepository.setNumber(Number);
-                informationStudentRepository.setPassword(Password);
-                informationStudentRepository.setRepeatPassword(RepeatPassword);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("Info", informationStudentRepository);
-                Navigation.findNavController(view).navigate(R.id.action_studentRegister1_to_studentRegister2, bundle);
+                if (!checkPasswords(Password, RepeatPassword)) {
+                    Toast.makeText(getContext(), "Пароли не совпадают", Toast.LENGTH_SHORT).show();
+                } else {
+                    informationStudentRepository.setNumber(Number);
+                    informationStudentRepository.setPassword(Password);
+                    informationStudentRepository.setRepeatPassword(RepeatPassword);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("Info", informationStudentRepository);
+                    Navigation.findNavController(view).navigate(R.id.action_studentRegister1_to_studentRegister2, bundle);
+                }
             }
         });
         return view;
     }
+    private boolean checkPasswords(String password1, String password2) {
+        return password1.equals(password2);
     }
-}
+    }
