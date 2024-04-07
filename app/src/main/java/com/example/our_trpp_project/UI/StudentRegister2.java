@@ -13,15 +13,21 @@ import android.widget.EditText;
 
 import com.example.our_trpp_project.Data.InformationStudentRepository;
 import com.example.our_trpp_project.R;
-
+/** The StudentRegister2 class contains input fields and a button. */
 public class StudentRegister2 extends Fragment {
+    /** Declaration of the repository. */
     InformationStudentRepository informationStudentRepository;
+    /** Constructor of the class, creates a new InformationStudentRepository */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         informationStudentRepository = new InformationStudentRepository();
     }
-
+    /**
+     * onCreateView function. Initializes the activity after its creation.
+     * Uses navigation to move between screens.
+     * Converts input data and passes it upon button click.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -31,6 +37,8 @@ public class StudentRegister2 extends Fragment {
         EditText editTextGrade = view.findViewById(R.id.editTextText2);
         EditText editTextCity = view.findViewById(R.id.editTextText3);
         button1.setOnClickListener(new View.OnClickListener() {
+            /** Handling button click */
+
             @Override
             public void onClick(View view) {
                 String Name = editTextName.getText().toString();
