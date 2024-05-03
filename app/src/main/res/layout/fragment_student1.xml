@@ -16,16 +16,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/shapka_student" />
 
-    <ImageView
-        android:id="@+id/imageView11"
-        android:layout_width="190dp"
-        android:layout_height="342dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="288dp"
-        android:src="@drawable/elem4"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
     <!--    <ImageView-->
 <!--        android:id="@+id/imageView5"-->
 <!--        android:layout_width="167dp"-->
@@ -38,20 +28,30 @@
 <!--        app:srcCompat="@drawable/fon2_1" />-->
 
     <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="190dp"
+        android:layout_height="342dp"
+        android:layout_marginStart="232dp"
+        android:layout_marginBottom="292dp"
+        android:src="@drawable/elem4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
         android:id="@+id/imageView13"
         android:layout_width="190dp"
         android:layout_height="342dp"
-        android:layout_marginEnd="240dp"
-        android:layout_marginBottom="-80dp"
+        android:layout_marginTop="476dp"
+        android:layout_marginEnd="224dp"
         android:src="@drawable/elem6"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView12"
         android:layout_width="501dp"
         android:layout_height="144dp"
-        android:layout_marginStart="-40dp"
+        android:layout_marginStart="-50dp"
         android:layout_marginTop="216dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
