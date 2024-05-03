@@ -14,14 +14,21 @@ import android.widget.Toast;
 
 import com.example.our_trpp_project.Data.InformationStudentRepository;
 import com.example.our_trpp_project.R;
-
+/** The StudentRegister1 class contains input fields and a button. */
 public class StudentRegister1 extends Fragment {
-
+    /** Declaration of the repository. */
     InformationStudentRepository informationStudentRepository;
+    /** Constructor of the class, creates a new InformationStudentRepository */
     public StudentRegister1() {
         super(R.layout.fragment_student1);
         informationStudentRepository = new InformationStudentRepository();
     }
+    /**
+     * onCreateView function. Initializes the activity after its creation.
+     * Uses navigation to move between screens.
+     * Converts input data and passes it upon button click.
+     * Checks the correctness of entered passwords.
+     */
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -32,6 +39,7 @@ public class StudentRegister1 extends Fragment {
         EditText editTextPassword = view.findViewById(R.id.editTextText2);
         EditText editTextRepeatPassword = view.findViewById(R.id.editTextText3);
         button1.setOnClickListener(new View.OnClickListener() {
+            /** Handling button click */
             @Override
             public void onClick(View view) {
                 String Number = editTextNumber.getText().toString();
@@ -51,6 +59,8 @@ public class StudentRegister1 extends Fragment {
         });
         return view;
     }
+    /** Function for checking passwords. */
+
     private boolean checkPasswords(String password1, String password2) {
         return password1.equals(password2);
     }

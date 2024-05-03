@@ -34,7 +34,8 @@ public class Student1 extends Fragment {
 
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_student1_to_studentRegister1);
+                Navigation.findNavController(view).navigate
+                        (R.id.action_student1_to_studentRegister1);
             }
         });
         return view;
