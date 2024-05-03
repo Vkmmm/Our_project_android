@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.example.our_trpp_project.Data.AppDatabaseTutor;
-import com.example.our_trpp_project.Data.StudentEntity;
+import com.example.our_trpp_project.Student.Data.StudentEntity;
 import com.example.our_trpp_project.Data.TutorDAO;
 import com.example.our_trpp_project.R;
 

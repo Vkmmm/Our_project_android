@@ -10,12 +10,12 @@
         android:layout_height="match_parent"
         android:src="@drawable/choice" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textColor="@color/black"/>
+<!--    <TextView-->
+<!--        android:id="@+id/textView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:textSize="18sp"-->
+<!--        android:textColor="@color/black"/>-->
 
 
 </LinearLayout>

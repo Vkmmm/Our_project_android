@@ -80,5 +80,14 @@
         android:id="@+id/studentMain1"
         android:name="com.example.our_trpp_project.UI.StudentMain1"
         android:label="fragment_student_main1"
-        tools:layout="@layout/fragment_student_main1" />
+        tools:layout="@layout/fragment_student_main1" >
+        <action
+            android:id="@+id/action_studentMain1_to_studentCabinet"
+            app:destination="@id/studentCabinet" />
+    </fragment>
+    <fragment
+        android:id="@+id/studentCabinet"
+        android:name="com.example.our_trpp_project.StudentCabinet"
+        android:label="fragment_student_cabinet"
+        tools:layout="@layout/fragment_student_cabinet" />
 </navigation>

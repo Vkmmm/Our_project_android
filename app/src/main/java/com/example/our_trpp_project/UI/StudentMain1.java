@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -38,12 +39,12 @@ public class StudentMain1 extends Fragment {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        View view = inflater.inflate(R.layout.fragment_student_main1, container, false);
-        Button profile_photo = view.findViewById(R.id.imageView5);
-        profile_photo.setOnClickListener(new View.OnClickListener() {
+        ImageView ava_image = rootView.findViewById(R.id.imageView);
+        ava_image.setImageResource(R.drawable.ava);
+        ava_image.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-
+            public void onClick(View v) {
+                Navigation.findNavController(rootView).navigate(R.id.action_studentMain1_to_studentCabinet);
             }
         });
 

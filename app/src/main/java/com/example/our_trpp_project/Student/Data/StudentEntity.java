@@ -1,4 +1,4 @@
-package com.example.our_trpp_project.Data;
+package com.example.our_trpp_project.Student.Data;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;

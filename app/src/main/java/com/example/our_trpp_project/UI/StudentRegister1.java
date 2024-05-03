@@ -10,9 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.our_trpp_project.Data.AppDatabaseStudent;
-import com.example.our_trpp_project.Data.StudentDAO;
-import com.example.our_trpp_project.Data.StudentEntity;
+import com.example.our_trpp_project.Student.Data.AppDatabaseStudent;
+import com.example.our_trpp_project.Student.Data.StudentDAO;
+import com.example.our_trpp_project.Student.Data.StudentEntity;
 import com.example.our_trpp_project.R;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
