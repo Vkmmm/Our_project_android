@@ -37,10 +37,10 @@ implementation("androidx.navigation:navigation-fragment:2.7.7")
 implementation("androidx.navigation:navigation-ui:2.7.7")
 ```
 
-## Создан с помощью
+## Создан и собран с помощью
 
-* Java - The programming language used
-
+* Java 17 - Язык программирования
+* Gradle 8.2 - Система сборки
 ## Авторы
 
 * **Vkmmm** - [Vkmmm.com](https://github.com/Vkmmm)
