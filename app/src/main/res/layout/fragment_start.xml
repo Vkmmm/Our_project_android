@@ -72,39 +72,34 @@
         android:id="@+id/button_stud"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="396dp"
         android:backgroundTint="@color/Background_blue"
         android:fontFamily="@font/montserrat_semibold"
         android:text="Я УЧЕНИК"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.549"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button_rep"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="444dp"
         android:backgroundTint="@color/Background_blue"
         android:fontFamily="@font/montserrat_semibold"
         android:text="Я РЕПЕТИТОР"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.65"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView7"
-        android:layout_width="375dp"
-        android:layout_height="473dp"
-        android:layout_marginBottom="-130dp"
+        android:layout_width="314dp"
+        android:layout_height="374dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="-100dp"
         android:src="@drawable/elem2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
