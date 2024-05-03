@@ -1,4 +1,4 @@
-﻿package com.example.our_trpp_project.Data;
+package com.example.our_trpp_project.Data;
 
 import androidx.room.Insert;
 import androidx.room.Query;

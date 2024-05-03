@@ -1,4 +1,4 @@
-﻿package com.example.our_trpp_project.Data;
+package com.example.our_trpp_project.Data;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -10,6 +10,21 @@ public class TutorEntity implements Serializable {
     private int TutorId;
     private String Number;
     private String Password;
+
+    public TutorEntity(int tutorId, String number, String password, String name, String surname, String lastName, String city, String education, String workExperience, int cost, String address) {
+        TutorId = tutorId;
+        Number = number;
+        Password = password;
+        Name = name;
+        Surname = surname;
+        LastName = lastName;
+        City = city;
+        Education = education;
+        WorkExperience = workExperience;
+        Cost = cost;
+        Address = address;
+    }
+
     private String Name;
     private String Surname;
     private String LastName;
@@ -108,4 +123,6 @@ public class TutorEntity implements Serializable {
     }
 
     private String Address;
+    public TutorEntity() {
+    }
 }

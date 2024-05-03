@@ -1,6 +1,4 @@
-﻿package com.example.our_trpp_project.Data;
-
-import static java.time.chrono.ThaiBuddhistChronology.INSTANCE;
+package com.example.our_trpp_project.Data;
 
 import android.content.Context;
 
