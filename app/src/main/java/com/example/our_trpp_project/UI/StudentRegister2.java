@@ -11,17 +11,21 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.our_trpp_project.Data.InformationStudentRepository;
+import com.example.our_trpp_project.Data.AppDatabaseStudent;
+import com.example.our_trpp_project.Data.StudentDAO;
+import com.example.our_trpp_project.Data.StudentEntity;
 import com.example.our_trpp_project.R;
 /** The StudentRegister2 class contains input fields and a button. */
 public class StudentRegister2 extends Fragment {
     /** Declaration of the repository. */
-    InformationStudentRepository informationStudentRepository;
+    StudentEntity studentEntity;
+    private AppDatabaseStudent dbStudent;
+    private StudentDAO studentDAO;
     /** Constructor of the class, creates a new InformationStudentRepository */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        informationStudentRepository = new InformationStudentRepository();
+        studentEntity = new StudentEntity();
     }
     /**
      * onCreateView function. Initializes the activity after its creation.
@@ -32,10 +36,12 @@ public class StudentRegister2 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.student_register2, container, false);
+
         Button button1 = view.findViewById(R.id.button6);
         EditText editTextName = view.findViewById(R.id.editTextText);
         EditText editTextGrade = view.findViewById(R.id.editTextText2);
         EditText editTextCity = view.findViewById(R.id.editTextText3);
+
         button1.setOnClickListener(new View.OnClickListener() {
             /** Handling button click */
 
@@ -44,12 +50,20 @@ public class StudentRegister2 extends Fragment {
                 String Name = editTextName.getText().toString();
                 String Grade = editTextGrade.getText().toString();
                 String City = editTextCity.getText().toString();
-                informationStudentRepository.setName(Name);
-                informationStudentRepository.setGrade(Grade);
-                informationStudentRepository.setCity(City);
+                studentEntity.setName(Name);
+                studentEntity.setGrade(Grade);
+                studentEntity.setCity(City);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        studentDAO.insert(studentEntity);
+                    }
+                }).start();
+
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("Info2", informationStudentRepository);
-                Navigation.findNavController(view).navigate(R.id.action_studentRegister1_to_studentRegister2, bundle);
+                bundle.putSerializable("Info2", studentEntity);
+                Navigation.findNavController(view).navigate
+                        (R.id.action_studentRegister1_to_studentRegister2, bundle);
             }
         });
         return view;

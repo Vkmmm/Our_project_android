@@ -34,7 +34,8 @@ public class Student_choice extends Fragment {
         }
     }
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.student_choice, container, false);
         RecyclerView itemsList = view.findViewById(R.id.recycleView);
         MyRecycleAdapter adapter = new MyRecycleAdapter(getContext(), generateItemListRecycle());

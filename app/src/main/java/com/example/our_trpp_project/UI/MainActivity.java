@@ -23,7 +23,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (savedInstanceState == null) {
-            NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+            NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().
+                    findFragmentById(R.id.nav_host_fragment);
             NavController navController = navHostFragment.getNavController();
             navController.navigate(R.id.startFragment);
         }
