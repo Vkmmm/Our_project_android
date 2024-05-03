@@ -30,7 +30,11 @@
         android:id="@+id/studentRegister2"
         android:name="com.example.our_trpp_project.UI.StudentRegister2"
         android:label="student_register2"
-        tools:layout="@layout/student_register2" />
+        tools:layout="@layout/student_register2" >
+        <action
+            android:id="@+id/action_studentRegister2_to_studentMain1"
+            app:destination="@id/studentMain1" />
+    </fragment>
     <fragment
         android:id="@+id/student1"
         android:name="com.example.our_trpp_project.UI.Student1"
@@ -72,4 +76,9 @@
         android:name="com.example.our_trpp_project.UI.TeacherRegister3"
         android:label="teacher_register3"
         tools:layout="@layout/teacher_register3" />
+    <fragment
+        android:id="@+id/studentMain1"
+        android:name="com.example.our_trpp_project.UI.StudentMain1"
+        android:label="fragment_student_main1"
+        tools:layout="@layout/fragment_student_main1" />
 </navigation>

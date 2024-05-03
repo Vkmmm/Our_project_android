@@ -1,66 +1,69 @@
 ﻿package com.example.our_trpp_project.UI;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.our_trpp_project.Data.Subject;
+import com.example.our_trpp_project.Data.Tutor;
 import com.example.our_trpp_project.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link StudentMain1#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.List;
+
 public class StudentMain1 extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public StudentMain1() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment StudentMain1.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static StudentMain1 newInstance(String param1, String param2) {
-        StudentMain1 fragment = new StudentMain1();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_student_main1, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_student_main1, container, false);
+
+        // Инициализация RecyclerView
+        RecyclerView recyclerView = rootView.findViewById(R.id.recycleView);
+
+        // Создание списка предметов с репетиторами
+        List<Subject> subjects = createSubjectList();
+
+        // Создание и установка адаптера для RecyclerView
+        SubjectAdapter adapter = new SubjectAdapter(subjects);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        return rootView;
+    }
+
+    private List<Subject> createSubjectList() {
+        List<Subject> subjects = new ArrayList<>();
+
+        // Создание предметов
+        Subject math = new Subject("Математика", createTutorList("Смирнова Светлана Георгиевна", "Васильев Аркадий Сергеевич"));
+        Subject physics = new Subject("Физика", createTutorList("Лушков Алексей Иванович"));
+        Subject rus = new Subject("Русский язык", createTutorList("Мосина Виктория Дмитриевна:)", "Иванова Ольга Викторовна", "Петрова Екатерина Павловна"));
+        Subject english = new Subject("Английский язык", createTutorList("Абрамов Юрий Петрович"));
+        Subject informatics = new Subject("Информатика", createTutorList("Мамаева Людмила Дмитриевна", "Пятлина Екатерина Валерьевна"));
+        Subject chemistry = new Subject("Химия", createTutorList("Строгина Надежда Сергеевна"));
+        // Добавление предметов в список
+        subjects.add(math);
+        subjects.add(physics);
+        subjects.add(rus);
+        subjects.add(english);
+        subjects.add(informatics);
+        subjects.add(chemistry);
+
+        return subjects;
+    }
+
+    private List<Tutor> createTutorList(String... tutorNames) {
+        List<Tutor> tutors = new ArrayList<>();
+        for (String name : tutorNames) {
+            tutors.add(new Tutor(name));
+        }
+        return tutors;
     }
 }
