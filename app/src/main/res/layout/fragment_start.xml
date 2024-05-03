@@ -50,34 +50,6 @@
 <!--        tools:ignore="MissingConstraints" />-->
 
 
-
-    <Button
-        android:id="@+id/button_stud"
-        android:layout_width="170dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/Background_blue"
-        android:fontFamily="@font/montserrat_semibold"
-        android:text="Я УЧЕНИК"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="386dp"
-        tools:ignore="MissingConstraints" />
-
-    <Button
-        android:id="@+id/button_rep"
-        android:layout_width="170dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/Background_blue"
-        android:fontFamily="@font/montserrat_semibold"
-        android:text="Я РЕПЕТИТОР"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="434dp"
-        tools:ignore="MissingConstraints" />
-
-
     <!--    <ImageView-->
 <!--        android:id="@+id/imageView2"-->
 <!--        android:layout_width="wrap_content"-->
@@ -95,6 +67,38 @@
 <!--        android:src="@drawable/fon1_3"-->
 <!--        tools:layout_editor_absoluteY="313dp"-->
 <!--        tools:ignore="MissingConstraints" />-->
+
+    <Button
+        android:id="@+id/button_stud"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/Background_blue"
+        android:fontFamily="@font/montserrat_semibold"
+        android:text="Я УЧЕНИК"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.549"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/button_rep"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/Background_blue"
+        android:fontFamily="@font/montserrat_semibold"
+        android:text="Я РЕПЕТИТОР"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.65"
+        tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/imageView7"
