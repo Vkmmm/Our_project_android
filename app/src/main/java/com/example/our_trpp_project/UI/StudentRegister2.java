@@ -15,12 +15,17 @@ import com.example.our_trpp_project.Data.AppDatabaseStudent;
 import com.example.our_trpp_project.Data.StudentDAO;
 import com.example.our_trpp_project.Data.StudentEntity;
 import com.example.our_trpp_project.R;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 /** The StudentRegister2 class contains input fields and a button. */
 public class StudentRegister2 extends Fragment {
     /** Declaration of the repository. */
     StudentEntity studentEntity;
     private AppDatabaseStudent dbStudent;
-    private StudentDAO studentDAO;
+    private StudentDAO studentDao;
+    private ExecutorService executorService;
     /** Constructor of the class, creates a new InformationStudentRepository */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,6 +41,9 @@ public class StudentRegister2 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.student_register2, container, false);
+        dbStudent = AppDatabaseStudent.getInstance(requireContext());
+        studentDao = dbStudent.studentDAO();
+        executorService = Executors.newSingleThreadExecutor();
 
         Button button1 = view.findViewById(R.id.button6);
         EditText editTextName = view.findViewById(R.id.editTextText);
@@ -56,14 +64,14 @@ public class StudentRegister2 extends Fragment {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        studentDAO.insert(studentEntity);
+                        studentDao.insert(studentEntity);
                     }
                 }).start();
 
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("Info2", studentEntity);
                 Navigation.findNavController(view).navigate
-                        (R.id.action_studentRegister1_to_studentRegister2, bundle);
+                        (R.id.action_studentRegister2_to_studentMain1, bundle);
             }
         });
         return view;
