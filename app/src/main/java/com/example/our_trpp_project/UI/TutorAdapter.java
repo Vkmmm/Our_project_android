@@ -16,9 +16,18 @@ import java.util.List;
 public class TutorAdapter extends RecyclerView.Adapter<TutorAdapter.TutorViewHolder> {
 
     private List<Tutor> tutors;
+    private OnItemClickListener listener;
 
     public TutorAdapter(List<Tutor> tutors) {
         this.tutors = tutors;
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(Tutor tutor);
     }
 
     @NonNull
@@ -32,6 +41,14 @@ public class TutorAdapter extends RecyclerView.Adapter<TutorAdapter.TutorViewHol
     public void onBindViewHolder(@NonNull TutorViewHolder holder, int position) {
         Tutor tutor = tutors.get(position);
         holder.tutorName.setText(tutor.getName());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null) {
+                    listener.onItemClick(tutor);
+                }
+            }
+        });
     }
 
     @Override

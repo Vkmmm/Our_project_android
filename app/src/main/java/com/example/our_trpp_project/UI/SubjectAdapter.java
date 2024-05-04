@@ -1,4 +1,6 @@
 package com.example.our_trpp_project.UI;
+import com.example.our_trpp_project.Data.Tutor;
+import com.example.our_trpp_project.UI.StudentMain1;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +20,16 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
 
     private List<Subject> subjects;
 
+    private OnItemClickListener listener;
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(Tutor tutor);
+    }
+
     public SubjectAdapter(List<Subject> subjects) {
         this.subjects = subjects;
     }
@@ -33,11 +45,21 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
     public void onBindViewHolder(@NonNull SubjectViewHolder holder, int position) {
         Subject subject = subjects.get(position);
         holder.subjectName.setText(subject.getName());
-
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null) {
+                    // Получаем первого репетитора из списка
+                    Tutor firstTutor = subject.getTutors().get(0);
+                    listener.onItemClick(firstTutor); // Передаем выбранного репетитора
+                }
+            }
+        });
         // Создайте и установите адаптер для подсписка репетиторов
         TutorAdapter tutorAdapter = new TutorAdapter(subject.getTutors());
         holder.tutorRecyclerView.setAdapter(tutorAdapter);
     }
+
 
     @Override
     public int getItemCount() {

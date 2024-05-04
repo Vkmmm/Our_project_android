@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,8 +24,9 @@ import com.example.our_trpp_project.Student.Data.StudentEntity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StudentMain1 extends Fragment {
+public class StudentMain1 extends Fragment implements SubjectAdapter.OnItemClickListener{
 
+    private SubjectAdapter adapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -40,7 +43,7 @@ public class StudentMain1 extends Fragment {
         List<Subject> subjects = createSubjectList();
 
         // Создание и установка адаптера для RecyclerView
-        SubjectAdapter adapter = new SubjectAdapter(subjects);
+        adapter = new SubjectAdapter(subjects);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -58,6 +61,23 @@ public class StudentMain1 extends Fragment {
         });
 
         return rootView;
+    }
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Ваш существующий код
+
+        adapter.setOnItemClickListener(this); // Передайте фрагмент в качестве слушателя
+    }
+
+    // Метод обработки нажатия на репетитора
+    @Override
+    public void onItemClick(Tutor tutor) {
+        // Здесь можно передать информацию о репетиторе на следующий экран и открыть его
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("SelectedTutor", tutor);
+        Navigation.findNavController(requireView()).navigate(R.id.action_studentMain1_to_tutorPage, bundle);
     }
 
     private List<Subject> createSubjectList() {
