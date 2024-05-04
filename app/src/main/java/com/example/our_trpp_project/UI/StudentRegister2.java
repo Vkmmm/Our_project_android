@@ -5,14 +5,14 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
-import com.example.our_trpp_project.Student.Data.AppDatabaseStudent;
-import com.example.our_trpp_project.Student.Data.StudentDAO;
 import com.example.our_trpp_project.Student.Data.StudentEntity;
 import com.example.our_trpp_project.R;
 
@@ -21,29 +21,18 @@ import java.util.concurrent.Executors;
 
 /** The StudentRegister2 class contains input fields and a button. */
 public class StudentRegister2 extends Fragment {
-    /** Declaration of the repository. */
-    StudentEntity studentEntity;
-    private AppDatabaseStudent dbStudent;
-    private StudentDAO studentDao;
-    private ExecutorService executorService;
-    /** Constructor of the class, creates a new InformationStudentRepository */
+    private StudentEntity studentEntity;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         studentEntity = new StudentEntity();
     }
-    /**
-     * onCreateView function. Initializes the activity after its creation.
-     * Uses navigation to move between screens.
-     * Converts input data and passes it upon button click.
-     */
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.student_register2, container, false);
-        dbStudent = AppDatabaseStudent.getInstance(requireContext());
-        studentDao = dbStudent.studentDAO();
-        executorService = Executors.newSingleThreadExecutor();
 
         Button button1 = view.findViewById(R.id.button6);
         EditText editTextName = view.findViewById(R.id.editTextText);
@@ -51,29 +40,38 @@ public class StudentRegister2 extends Fragment {
         EditText editTextCity = view.findViewById(R.id.editTextText3);
 
         button1.setOnClickListener(new View.OnClickListener() {
-            /** Handling button click */
-
             @Override
             public void onClick(View view) {
                 String Name = editTextName.getText().toString();
                 String Grade = editTextGrade.getText().toString();
                 String City = editTextCity.getText().toString();
-                studentEntity.setName(Name);
-                studentEntity.setGrade(Grade);
-                studentEntity.setCity(City);
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        studentDao.insert(studentEntity);
-                    }
-                }).start();
 
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("Info2", studentEntity);
-                Navigation.findNavController(view).navigate
-                        (R.id.action_studentRegister2_to_studentMain1, bundle);
+                // Проверяем, что поля не пустые
+                if (TextUtils.isEmpty(Name) || TextUtils.isEmpty(Grade) || TextUtils.isEmpty(City)) {
+                    // Если какое-то из полей пустое, выводим сообщение об ошибке
+                    Toast.makeText(getContext(), "Пожалуйста, заполните все поля", Toast.LENGTH_SHORT).show();
+                } else {
+                    Bundle bundle = new Bundle();
+
+                    // Проверяем наличие информации о студенте в аргументах
+                    if (getArguments() != null && getArguments().containsKey("Info")) {
+                        // Получаем информацию о студенте из аргументов
+                        StudentEntity studentEntity = (StudentEntity) getArguments().getSerializable("Info");
+                        // Устанавливаем новые данные
+                        studentEntity.setName(Name);
+                        studentEntity.setGrade(Grade);
+                        studentEntity.setCity(City);
+                        // Помещаем обновленный объект студента в Bundle
+                        bundle.putSerializable("StudentInfo", studentEntity);
+                    }
+
+                    // Передаем обновленные данные в следующий фрагмент
+                    Navigation.findNavController(view).navigate(R.id.action_studentRegister2_to_studentMain1, bundle);
+                }
             }
         });
+
+
         return view;
     }
 }
