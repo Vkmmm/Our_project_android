@@ -48,17 +48,27 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (listener != null) {
-                    // Получаем первого репетитора из списка
-                    Tutor firstTutor = subject.getTutors().get(0);
-                    listener.onItemClick(firstTutor); // Передаем выбранного репетитора
+                // Проверяем, есть ли подсписок репетиторов
+                if (listener != null && subject.getTutors() != null && !subject.getTutors().isEmpty()) {
+                    // Передаем первого репетитора из списка выбранного предмета
+                    listener.onItemClick(subject.getTutors().get(0));
                 }
             }
         });
         // Создайте и установите адаптер для подсписка репетиторов
         TutorAdapter tutorAdapter = new TutorAdapter(subject.getTutors());
+        tutorAdapter.setOnItemClickListener(new TutorAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Tutor tutor) {
+                // Передаем информацию о выбранном репетиторе
+                if (listener != null) {
+                    listener.onItemClick(tutor);
+                }
+            }
+        });
         holder.tutorRecyclerView.setAdapter(tutorAdapter);
     }
+
 
 
     @Override
