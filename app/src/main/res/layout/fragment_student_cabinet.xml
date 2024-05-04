@@ -2,14 +2,78 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/button_toggle_visibility"
-        android:layout_width="wrap_content"
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="244dp"
+        android:layout_height="226dp"
+        tools:src="@drawable/ava2"
+        android:layout_gravity="center"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Изменить"
-        android:onClick="toggleVisibility" />
+        android:orientation="horizontal"
+        android:layout_gravity="center">
+
+        <Button
+            android:id="@+id/button_toggle_visibility"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/Background_blue"
+            android:onClick="toggleVisibility"
+            android:text="Изменить"
+            android:textColor="@color/black" />
+
+        <Button
+            android:id="@+id/button_save"
+            android:layout_width="195dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/Background_blue"
+            android:onClick="toggleVisibility"
+            android:text="Сохранить"
+            android:textColor="@color/black" />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/textView_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Имя"
+        android:visibility="visible"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/textView_telephone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Номер телефона"
+        android:visibility="visible"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/textView_city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Город"
+        android:visibility="visible"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/textView_class"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Класс"
+        android:visibility="visible"
+        android:layout_gravity="center"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -118,4 +182,7 @@
             android:visibility="gone" />
 
     </LinearLayout>
+
+
+
 </LinearLayout>
