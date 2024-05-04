@@ -1,4 +1,4 @@
-﻿package com.example.our_trpp_project.UI;
+package com.example.our_trpp_project.UI;
 
 import android.os.Bundle;
 
