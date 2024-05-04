@@ -29,6 +29,7 @@ public class Student1 extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_student1, container, false);
         Button button = view.findViewById(R.id.button3);
+        Button button2 = view.findViewById(R.id.button2);
         button.setOnClickListener(new View.OnClickListener() {
             /** Handling button click */
 
@@ -38,6 +39,16 @@ public class Student1 extends Fragment {
                         (R.id.action_student1_to_studentRegister1);
             }
         });
+        button2.setOnClickListener(new View.OnClickListener() {
+            /** Handling button click */
+
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate
+                        (R.id.action_student1_to_studentEnter1);
+            }
+        });
+
         return view;
     }
 }

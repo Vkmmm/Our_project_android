@@ -11,14 +11,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.our_trpp_project.Student.Data.AppDatabaseStudent;
-import com.example.our_trpp_project.Student.Data.StudentDAO;
 import com.example.our_trpp_project.Student.Data.StudentEntity;
 
 import java.util.List;
 
 public class StudentCabinet extends Fragment {
-    private AppDatabaseStudent appDatabase;
     private TextView textViewEditNumber;
     private TextView textViewEditPassword;
     private TextView textViewEditName;
@@ -29,8 +26,6 @@ public class StudentCabinet extends Fragment {
     private EditText editTextEditName;
     private EditText editTextEditGrade;
     private EditText editTextEditCity;
-    private AppDatabaseStudent dbStudent;
-    private StudentDAO studentDao;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,7 +36,6 @@ public class StudentCabinet extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_student_cabinet, container, false);
-        appDatabase = AppDatabaseStudent.getInstance(requireContext());
 
         // Инициализация текстовых полей
         textViewEditNumber = view.findViewById(R.id.textView_edit_number);
@@ -58,7 +52,15 @@ public class StudentCabinet extends Fragment {
 
         Button button_change = view.findViewById(R.id.button_toggle_visibility);
 
-
+        Bundle bundle = getArguments();
+        if (bundle != null && bundle.containsKey("StudentInfo")) {
+            StudentEntity studentEntity = (StudentEntity) bundle.getSerializable("StudentInfo");
+            textViewEditNumber.setText(studentEntity.getNumber());
+            textViewEditPassword.setText(studentEntity.getPassword());
+            textViewEditName.setText(studentEntity.getName());
+            textViewEditGrade.setText(studentEntity.getGrade());
+            textViewEditCity.setText(studentEntity.getCity());
+        }
         // fillTextFields();
         button_change.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,8 +71,6 @@ public class StudentCabinet extends Fragment {
     }
     private void fillTextFields() {
         // Получение списка всех студентов из базы данных
-        dbStudent = AppDatabaseStudent.getInstance(requireContext());
-        studentDao = dbStudent.studentDAO();
         StudentEntity student = new StudentEntity();
             textViewEditNumber.setText(student.getNumber());
             textViewEditPassword.setText(student.getPassword());

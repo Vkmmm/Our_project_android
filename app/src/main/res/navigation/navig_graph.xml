@@ -43,6 +43,9 @@
         <action
             android:id="@+id/action_student1_to_studentRegister1"
             app:destination="@id/studentRegister1" />
+        <action
+            android:id="@+id/action_student1_to_studentEnter1"
+            app:destination="@id/studentEnter1" />
     </fragment>
     <fragment
         android:id="@+id/teacher1"
@@ -90,4 +93,12 @@
         android:name="com.example.our_trpp_project.StudentCabinet"
         android:label="fragment_student_cabinet"
         tools:layout="@layout/fragment_student_cabinet" />
+    <fragment
+        android:id="@+id/studentEnter1"
+        android:name="com.example.our_trpp_project.UI.StudentEnter1"
+        android:label="StudentEnter1" >
+        <action
+            android:id="@+id/action_studentEnter1_to_studentMain1"
+            app:destination="@id/studentMain1" />
+    </fragment>
 </navigation>
