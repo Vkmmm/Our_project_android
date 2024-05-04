@@ -39,8 +39,8 @@ public class StudentMain1 extends Fragment {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        ImageView ava_image = rootView.findViewById(R.id.imageView);
-        ava_image.setImageResource(R.drawable.ava);
+        ImageView ava_image = rootView.findViewById(R.id.imageView5);
+        ava_image.setImageResource(R.drawable.ava2);
         ava_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
