@@ -39,6 +39,13 @@
             android:text="Сохранить"
             android:textColor="@color/black" />
 
+        <Button
+            android:id="@+id/button_Back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Назад" />
+
     </LinearLayout>
 
 
