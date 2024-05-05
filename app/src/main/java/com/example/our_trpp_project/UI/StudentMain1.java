@@ -1,5 +1,6 @@
 package com.example.our_trpp_project.UI;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +28,7 @@ import java.util.List;
 public class StudentMain1 extends Fragment implements SubjectAdapter.OnItemClickListener{
 
     private SubjectAdapter adapter;
+    private ImageView ava_image;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -48,7 +50,16 @@ public class StudentMain1 extends Fragment implements SubjectAdapter.OnItemClick
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         ImageView ava_image = rootView.findViewById(R.id.imageView5);
-        ava_image.setImageResource(R.drawable.ava2);
+        //   ava_image.setImageResource(R.drawable.ava2);
+        Bundle bundle = getArguments();
+        if (bundle != null && bundle.containsKey("ImageUri")) {
+            // Если в Bundle содержится URI изображения, устанавливаем его в ImageView
+            String imageUriString = bundle.getString("ImageUri");
+            if (imageUriString != null) {
+                Uri imageUri = Uri.parse(imageUriString);
+                ava_image.setImageURI(imageUri);
+            }
+        }
         ava_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,6 +70,7 @@ public class StudentMain1 extends Fragment implements SubjectAdapter.OnItemClick
                 Navigation.findNavController(rootView).navigate(R.id.action_studentMain1_to_studentCabinet, bundle);}
             }
         });
+
 
         return rootView;
     }

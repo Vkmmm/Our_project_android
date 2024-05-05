@@ -6,9 +6,18 @@ import androidx.room.PrimaryKey;
 import java.io.Serializable;
 @Entity
 public class StudentEntity implements Serializable {
+    public void setImageUri(String imageUri) {
+        ImageUri = imageUri;
+    }
+
     @PrimaryKey(autoGenerate = true)
     private int StudentId;
 
+    public String getImageUri() {
+        return ImageUri;
+    }
+
+    private String ImageUri;
     public void setStudentId(int studentId) {
         StudentId = studentId;
     }
@@ -68,13 +77,14 @@ public class StudentEntity implements Serializable {
     }
 
     public StudentEntity(int studentId, String number, String password,
-                         String name, String grade, String city) {
+                         String name, String grade, String city, String imageUri) {
         StudentId = studentId;
         Number = number;
         Password = password;
         Name = name;
         Grade = grade;
         City = city;
+        imageUri = ImageUri;
     }
 
 }

@@ -95,7 +95,11 @@
         android:id="@+id/studentCabinet"
         android:name="com.example.our_trpp_project.StudentCabinet"
         android:label="fragment_student_cabinet"
-        tools:layout="@layout/fragment_student_cabinet" />
+        tools:layout="@layout/fragment_student_cabinet" >
+        <action
+            android:id="@+id/action_studentCabinet_to_studentMain1"
+            app:destination="@id/studentMain1" />
+    </fragment>
     <fragment
         android:id="@+id/studentEnter1"
         android:name="com.example.our_trpp_project.UI.StudentEnter1"

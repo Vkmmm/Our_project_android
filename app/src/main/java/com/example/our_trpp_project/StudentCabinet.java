@@ -35,12 +35,12 @@ public class StudentCabinet extends Fragment {
     private EditText editTextEditCity;
     private StudentEntity studentEntity;
     private static final int PICK_IMAGE_REQUEST = 1;
+    private Uri selectedImageUri;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_student_cabinet, container, false);
-
         // Инициализация текстовых полей
         textViewEditNumber = view.findViewById(R.id.textView_edit_number);
         textViewEditPassword = view.findViewById(R.id.textView_edit_password);
@@ -57,6 +57,8 @@ public class StudentCabinet extends Fragment {
         // Инициализация кнопок
         Button button_change = view.findViewById(R.id.button_toggle_visibility);
         Button button_save = view.findViewById(R.id.button_save);
+        Button button_back = view.findViewById(R.id.button_Back);
+
 
         Bundle bundle = getArguments();
         if (bundle != null && bundle.containsKey("StudentInfo")) {
@@ -84,9 +86,20 @@ public class StudentCabinet extends Fragment {
                 studentEntity.setName(name);
                 studentEntity.setGrade(grade);
                 studentEntity.setCity(city);
-                hideEditTextAndShowTextView();
+                Uri imageUri = getImageUri();
+                if (imageUri != null) {
+                    // Сохраняем URI изображения в объекте StudentEntity
+                    studentEntity.setImageUri(imageUri.toString());
+                }
+
+                // Проверяем, видимы ли сейчас EditText
+                if (editTextEditNumber.getVisibility() == View.VISIBLE) {
+                    // Если EditText видим, скрываем его и показываем TextView
+                    hideEditTextAndShowTextView();
+                }
             }
         });
+
         ImageView imageView = view.findViewById(R.id.imageView5);
 
         // Установка обработчика нажатия на ImageView
@@ -98,6 +111,22 @@ public class StudentCabinet extends Fragment {
             }
 
         });
+        button_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Создание нового Bundle
+                Bundle bundle = new Bundle();
+
+                // Если выбрано изображение, добавляем его URI в Bundle
+                if (selectedImageUri != null) {
+                    bundle.putString("ImageUri", selectedImageUri.toString());
+                }
+
+                // Переход на предыдущий фрагмент (StudentMain1) с передачей Bundle
+                Navigation.findNavController(view).navigate(R.id.action_studentCabinet_to_studentMain1, bundle);
+            }
+        });
+
 
         // Настройка обработчика для кнопки "Изменить видимость"
         button_change.setOnClickListener(new View.OnClickListener() {
@@ -168,10 +197,21 @@ public class StudentCabinet extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null) {
             // Получение выбранного изображения из данных результата
-            Uri imageUri = data.getData();
+            selectedImageUri = data.getData();
             // Установка выбранного изображения в ImageView
             ImageView imageView = getView().findViewById(R.id.imageView5);
-            imageView.setImageURI(imageUri);
+            imageView.setImageURI(selectedImageUri);
         }
     }
+    // Метод для получения URI выбранного изображения из результата выбора из галереи
+    private Uri getImageUri() {
+        if (getContext() != null && getActivity() != null) {
+            Intent intent = getActivity().getIntent();
+            if (intent != null && intent.getData() != null) {
+                return intent.getData();
+            }
+        }
+        return null;
+    }
+
 }
