@@ -87,6 +87,9 @@
         <action
             android:id="@+id/action_studentMain1_to_studentCabinet"
             app:destination="@id/studentCabinet" />
+        <action
+            android:id="@+id/action_studentMain1_to_tutorPage"
+            app:destination="@id/tutorPage" />
     </fragment>
     <fragment
         android:id="@+id/studentCabinet"
@@ -101,4 +104,9 @@
             android:id="@+id/action_studentEnter1_to_studentMain1"
             app:destination="@id/studentMain1" />
     </fragment>
+    <fragment
+        android:id="@+id/tutorPage"
+        android:name="com.example.our_trpp_project.UI.TutorPage"
+        android:label="fragment_tutor_page"
+        tools:layout="@layout/fragment_tutor_page" />
 </navigation>
