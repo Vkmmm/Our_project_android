@@ -7,211 +7,14 @@
     android:orientation="vertical">
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="450dp"
-        android:layout_height="144dp"
-        android:layout_marginTop="-10dp"
-        android:layout_marginStart="-25dp"
-        app:srcCompat="@drawable/shapka_student" />
-
-
-    <ImageView
         android:id="@+id/imageView5"
         android:layout_width="244dp"
         android:layout_height="226dp"
         tools:src="@drawable/ava2"
         android:layout_gravity="center"/>
 
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="95dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/textView_telephone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_semibold"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="35dp"
-            android:textSize="16sp"
-            android:text="Номер телефона"
-            android:visibility="visible"/>
-
-
-        <TextView
-            android:id="@+id/textView_edit_number"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_regular"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="5dp"
-            android:textSize="16sp"
-            android:text="Изменяемый текст 1"
-            android:visibility="visible" />
-
-        <!-- EditText -->
-        <EditText
-            android:id="@+id/editText_edit_number"
-            android:layout_width="match_parent"
-            android:fontFamily="@font/montserrat_regular"
-            android:layout_height="wrap_content"
-            android:visibility="gone" />
-
-    </LinearLayout>
-
-    <!-- Второе редактируемое поле -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/textView_password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_semibold"
-            android:layout_marginStart="15dp"
-            android:textSize="16sp"
-            android:text="Пароль"
-            android:visibility="visible"/>
-
-        <TextView
-            android:id="@+id/textView_edit_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_regular"
-            android:layout_marginStart="15dp"
-            android:textSize="16sp"
-            android:layout_marginTop="5dp"
-            android:text="Изменяемый текст 2"
-            android:visibility="visible" />
-
-        <!-- EditText -->
-        <EditText
-            android:id="@+id/editText_edit_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_regular"
-            android:visibility="gone" />
-
-    </LinearLayout>
-
-    <!-- Третье редактируемое поле -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/textView_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_semibold"
-            android:layout_marginStart="15dp"
-            android:textSize="16sp"
-            android:text="Имя"
-            android:visibility="visible"/>
-
-        <TextView
-            android:id="@+id/textView_edit_Name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_regular"
-            android:layout_marginStart="15dp"
-            android:textSize="16sp"
-            android:layout_marginTop="5dp"
-            android:text="Изменяемый текст 3"
-            android:visibility="visible" />
-
-        <!-- EditText -->
-        <EditText
-            android:id="@+id/editText_edit_Name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_regular"
-            android:visibility="gone" />
-
-    </LinearLayout>
-
-    <!-- Четвертое редактируемое поле -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/textView_class"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_semibold"
-            android:layout_marginStart="15dp"
-            android:textSize="16sp"
-            android:text="Класс"
-            android:visibility="visible"/>
-
-        <TextView
-            android:id="@+id/textView_edit_grade"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Изменяемый текст 4"
-            android:layout_marginStart="15dp"
-            android:textSize="16sp"
-            android:layout_marginTop="5dp"
-            android:fontFamily="@font/montserrat_regular"
-            android:visibility="visible" />
-
-        <!-- EditText -->
-        <EditText
-            android:id="@+id/editText_edit_grade"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_regular"
-            android:visibility="gone" />
-
-    </LinearLayout>
-
-    <!-- Пятое редактируемое поле -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/textView_city"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_semibold"
-            android:layout_marginStart="15dp"
-            android:textSize="16sp"
-            android:text="Город"
-            android:visibility="visible"/>
-
-        <TextView
-            android:id="@+id/textView_edit_city"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:textSize="16sp"
-            android:layout_marginTop="5dp"
-            android:text="Изменяемый текст 5"
-            android:fontFamily="@font/montserrat_regular"
-            android:visibility="visible" />
-
-        <!-- EditText -->
-        <EditText
-            android:id="@+id/editText_edit_city"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:fontFamily="@font/montserrat_regular"
-            android:visibility="gone" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_gravity="center">
@@ -220,7 +23,6 @@
             android:id="@+id/button_toggle_visibility"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
             android:layout_gravity="center"
             android:backgroundTint="@color/Background_blue"
             android:onClick="toggleVisibility"
@@ -229,30 +31,173 @@
 
         <Button
             android:id="@+id/button_save"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
+            android:layout_width="195dp"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:backgroundTint="@color/Background_blue"
             android:onClick="toggleVisibility"
             android:text="Сохранить"
             android:textColor="@color/black" />
 
+        <Button
+            android:id="@+id/button_Back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Назад" />
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/button_Back"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="15dp"
-        android:layout_width="wrap_content"
+
+    <TextView
+        android:id="@+id/textView_name"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/Background_blue"
-        android:textColor="@color/black"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:text="Назад" />
+        android:text="Имя"
+        android:visibility="visible"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/textView_telephone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Номер телефона"
+        android:visibility="visible"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/textView_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Пароль"
+        android:visibility="visible"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/textView_city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Город"
+        android:visibility="visible"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/textView_class"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Класс"
+        android:visibility="visible"
+        android:layout_gravity="center"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView_edit_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Изменяемый текст 1"
+            android:visibility="visible" />
+
+        <!-- EditText -->
+        <EditText
+            android:id="@+id/editText_edit_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+    <!-- Второе редактируемое поле -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView_edit_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Изменяемый текст 2"
+            android:visibility="visible" />
+
+        <!-- EditText -->
+        <EditText
+            android:id="@+id/editText_edit_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+    <!-- Третье редактируемое поле -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView_edit_Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Изменяемый текст 3"
+            android:visibility="visible" />
+
+        <!-- EditText -->
+        <EditText
+            android:id="@+id/editText_edit_Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+    <!-- Четвертое редактируемое поле -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView_edit_grade"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Изменяемый текст 4"
+            android:visibility="visible" />
+
+        <!-- EditText -->
+        <EditText
+            android:id="@+id/editText_edit_grade"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+    <!-- Пятое редактируемое поле -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView_edit_city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Изменяемый текст 5"
+            android:visibility="visible" />
+
+        <!-- EditText -->
+        <EditText
+            android:id="@+id/editText_edit_city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+
 
 </LinearLayout>

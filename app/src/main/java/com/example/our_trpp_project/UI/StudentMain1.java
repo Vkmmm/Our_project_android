@@ -50,7 +50,7 @@ public class StudentMain1 extends Fragment implements SubjectAdapter.OnItemClick
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         ImageView ava_image = rootView.findViewById(R.id.imageView5);
-        ava_image.setImageResource(R.drawable.ava2);
+        //   ava_image.setImageResource(R.drawable.ava2);
         Bundle bundle = getArguments();
         if (bundle != null && bundle.containsKey("ImageUri")) {
             // Если в Bundle содержится URI изображения, устанавливаем его в ImageView

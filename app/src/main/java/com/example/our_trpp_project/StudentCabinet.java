@@ -101,7 +101,7 @@ public class StudentCabinet extends Fragment {
         });
 
         ImageView imageView = view.findViewById(R.id.imageView5);
-        imageView.setImageResource(R.drawable.ava2);
+
         // Установка обработчика нажатия на ImageView
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
