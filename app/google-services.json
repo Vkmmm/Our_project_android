@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "370192191464",
+    "project_id": "trpp-project-34471",
+    "storage_bucket": "trpp-project-34471.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:370192191464:android:39f8891c1033a37496de5d",
+        "android_client_info": {
+          "package_name": "com.example.our_trpp_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAeUbryv1Pad6f9eLd3VyUx3-_UDUorWN8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

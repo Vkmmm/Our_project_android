@@ -86,5 +86,10 @@ public class StudentEntity implements Serializable {
         City = city;
         imageUri = ImageUri;
     }
-
+    public StudentEntity(String number, String name, String city, String grade) {
+        this.Number = number;
+        this.Name = name;
+        this.City = city;
+        this.Grade = grade;
+    }
 }

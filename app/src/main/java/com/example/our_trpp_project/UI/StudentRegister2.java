@@ -13,15 +13,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.our_trpp_project.Repository.Repository;
 import com.example.our_trpp_project.Student.Data.StudentEntity;
 import com.example.our_trpp_project.R;
-
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 /** The StudentRegister2 class contains input fields and a button. */
 public class StudentRegister2 extends Fragment {
     private StudentEntity studentEntity;
+
+    private FirebaseFirestore db;
+    private FirebaseAuth mAuth;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,8 @@ public class StudentRegister2 extends Fragment {
         EditText editTextName = view.findViewById(R.id.editTextText);
         EditText editTextGrade = view.findViewById(R.id.editTextText2);
         EditText editTextCity = view.findViewById(R.id.editTextText3);
+        //Новое
+        Repository repository = new Repository();
 
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +68,8 @@ public class StudentRegister2 extends Fragment {
                         studentEntity.setCity(City);
                         // Помещаем обновленный объект студента в Bundle
                         bundle.putSerializable("StudentInfo", studentEntity);
+                        // Помещаем в db
+                        repository.saveUserToDatabase(Name,Grade, City, getContext());
                     }
 
                     // Передаем обновленные данные в следующий фрагмент
@@ -72,6 +79,8 @@ public class StudentRegister2 extends Fragment {
         });
 
 
+
         return view;
     }
+
 }

@@ -19,10 +19,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.our_trpp_project.Student.Data.StudentEntity;
-
-import java.util.List;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class StudentCabinet extends Fragment {
+    private FirebaseFirestore db;
+    private FirebaseAuth mAuth;
     private TextView textViewEditNumber;
     private TextView textViewEditPassword;
     private TextView textViewEditName;
@@ -54,25 +57,42 @@ public class StudentCabinet extends Fragment {
         editTextEditGrade = view.findViewById(R.id.editText_edit_grade);
         editTextEditCity = view.findViewById(R.id.editText_edit_city);
 
+        db = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        String userId = mAuth.getCurrentUser().getUid();
+        db.collection("students").document(userId).get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            // Данные пользователя успешно получены
+                            String email = document.getString("email");
+                            String name = document.getString("name");
+                            String city = document.getString("city");
+                            String grade = document.getString("grade");
+                            // Инициализация объекта StudentEntity
+                            studentEntity = new StudentEntity(email, name, city, grade);
+                            textViewEditNumber.setText(email);
+                            textViewEditPassword.setText("Не сохраняется");
+                            textViewEditName.setText(name);
+                            textViewEditGrade.setText(grade);
+                            textViewEditCity.setText(city);
+                        }
+                    }
+                });
+
         // Инициализация кнопок
         Button button_change = view.findViewById(R.id.button_toggle_visibility);
         Button button_save = view.findViewById(R.id.button_save);
         Button button_back = view.findViewById(R.id.button_Back);
 
-
-        Bundle bundle = getArguments();
-        if (bundle != null && bundle.containsKey("StudentInfo")) {
-            studentEntity = (StudentEntity) bundle.getSerializable("StudentInfo");
-            textViewEditNumber.setText(studentEntity.getNumber());
-            textViewEditPassword.setText(studentEntity.getPassword());
-            textViewEditName.setText(studentEntity.getName());
-            textViewEditGrade.setText(studentEntity.getGrade());
-            textViewEditCity.setText(studentEntity.getCity());
-        }
-
         button_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Проверяем, что studentEntity инициализирован
+                if (studentEntity == null) {
+                    studentEntity = new StudentEntity();
+                }
                 // Получаем текст из EditText
                 String number = editTextEditNumber.getText().toString();
                 String password = editTextEditPassword.getText().toString();
@@ -101,7 +121,7 @@ public class StudentCabinet extends Fragment {
         });
 
         ImageView imageView = view.findViewById(R.id.imageView5);
-
+        imageView.setImageResource(R.drawable.ava2);
         // Установка обработчика нажатия на ImageView
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -213,5 +233,5 @@ public class StudentCabinet extends Fragment {
         }
         return null;
     }
-
 }
+
