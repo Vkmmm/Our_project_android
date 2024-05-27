@@ -74,7 +74,7 @@
         android:layout_width="390dp"
         android:layout_height="60dp"
         android:ems="10"
-        android:hint="Номер телефона:"
+        android:hint="Почта:"
         android:inputType="text"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"

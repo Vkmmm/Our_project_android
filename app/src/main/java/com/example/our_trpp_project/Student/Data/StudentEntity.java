@@ -1,95 +1,71 @@
 package com.example.our_trpp_project.Student.Data;
 
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
-
 import java.io.Serializable;
-@Entity
+
 public class StudentEntity implements Serializable {
-    public void setImageUri(String imageUri) {
-        ImageUri = imageUri;
-    }
-
-    @PrimaryKey(autoGenerate = true)
-    private int StudentId;
-
-    public String getImageUri() {
-        return ImageUri;
-    }
-
-    private String ImageUri;
-    public void setStudentId(int studentId) {
-        StudentId = studentId;
-    }
-
-    public void setNumber(String number) {
-        Number = number;
-    }
-
-    public void setPassword(String password) {
-        Password = password;
-    }
-
-    public void setName(String name) {
-        Name = name;
-    }
-
-    public void setGrade(String grade) {
-        Grade = grade;
-    }
-
-    public void setCity(String city) {
-        City = city;
-    }
-
-    private String Number;
-
-    public int getStudentId() {
-        return StudentId;
-    }
-
-    public String getNumber() {
-        return Number;
-    }
-
-    public String getPassword() {
-        return Password;
-    }
-
-    public String getName() {
-        return Name;
-    }
-
-    public String getGrade() {
-        return Grade;
-    }
-
-    public String getCity() {
-        return City;
-    }
-
-    private String Password;
-    private String Name;
-    private String Grade;
-    private String City;
+    private String email;
+    private String name;
+    private String city;
+    private String grade;
+    private String imageUri;
 
     public StudentEntity() {
     }
 
-    public StudentEntity(int studentId, String number, String password,
-                         String name, String grade, String city, String imageUri) {
-        StudentId = studentId;
-        Number = number;
-        Password = password;
-        Name = name;
-        Grade = grade;
-        City = city;
-        imageUri = ImageUri;
+    public StudentEntity(String email, String name, String city, String grade) {
+        this.email = email;
+        this.name = name;
+        this.city = city;
+        this.grade = grade;
     }
-    public StudentEntity(String number, String name, String city, String grade) {
-        this.Number = number;
-        this.Name = name;
-        this.City = city;
-        this.Grade = grade;
+
+    public StudentEntity(String email, String name, String city, String grade, String imageUri) {
+        this.email = email;
+        this.name = name;
+        this.city = city;
+        this.grade = grade;
+        this.imageUri = imageUri;
+    }
+
+    // Геттеры и сеттеры для всех полей
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
+
+    public String getImageUri() {
+        return imageUri;
+    }
+
+    public void setImageUri(String imageUri) {
+        this.imageUri = imageUri;
     }
 }

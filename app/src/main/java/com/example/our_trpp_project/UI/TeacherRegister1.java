@@ -52,8 +52,7 @@ public class TeacherRegister1 extends Fragment {
                     Toast.makeText(getContext(), "Пароли не совпадают", Toast.LENGTH_SHORT).show();
                 } else {
                     StudentEntity student = new StudentEntity();
-                    student.setNumber(number);
-                    student.setPassword(password);
+                    student.setEmail(number);
 
                     executorService.execute(new Runnable() {
                         @Override

@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
@@ -17,22 +17,27 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.our_trpp_project.Student.Data.StudentEntity;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 public class StudentCabinet extends Fragment {
     private FirebaseFirestore db;
     private FirebaseAuth mAuth;
-    private TextView textViewEditNumber;
-    private TextView textViewEditPassword;
+    private StorageReference storageRef;
+    private TextView textViewEditEmail;
     private TextView textViewEditName;
     private TextView textViewEditGrade;
     private TextView textViewEditCity;
-    private EditText editTextEditNumber;
-    private EditText editTextEditPassword;
+    private EditText editTextEditEmail;
     private EditText editTextEditName;
     private EditText editTextEditGrade;
     private EditText editTextEditCity;
@@ -45,20 +50,19 @@ public class StudentCabinet extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_student_cabinet, container, false);
         // Инициализация текстовых полей
-        textViewEditNumber = view.findViewById(R.id.textView_edit_number);
-        textViewEditPassword = view.findViewById(R.id.textView_edit_password);
+        textViewEditEmail = view.findViewById(R.id.textView_edit_email);
         textViewEditName = view.findViewById(R.id.textView_edit_Name);
         textViewEditGrade = view.findViewById(R.id.textView_edit_grade);
         textViewEditCity = view.findViewById(R.id.textView_edit_city);
 
-        editTextEditNumber = view.findViewById(R.id.editText_edit_number);
-        editTextEditPassword = view.findViewById(R.id.editText_edit_password);
+        editTextEditEmail = view.findViewById(R.id.editText_edit_email);
         editTextEditName = view.findViewById(R.id.editText_edit_Name);
         editTextEditGrade = view.findViewById(R.id.editText_edit_grade);
         editTextEditCity = view.findViewById(R.id.editText_edit_city);
 
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
+        storageRef = FirebaseStorage.getInstance().getReference();
         String userId = mAuth.getCurrentUser().getUid();
         db.collection("students").document(userId).get()
                 .addOnCompleteListener(task -> {
@@ -70,13 +74,17 @@ public class StudentCabinet extends Fragment {
                             String name = document.getString("name");
                             String city = document.getString("city");
                             String grade = document.getString("grade");
+                            String imageUrl = document.getString("imageUri");
                             // Инициализация объекта StudentEntity
-                            studentEntity = new StudentEntity(email, name, city, grade);
-                            textViewEditNumber.setText(email);
-                            textViewEditPassword.setText("Не сохраняется");
+                            studentEntity = new StudentEntity(email, name, city, grade, imageUrl);
+                            textViewEditEmail.setText(email);
                             textViewEditName.setText(name);
                             textViewEditGrade.setText(grade);
                             textViewEditCity.setText(city);
+                            if (imageUrl != null && !imageUrl.isEmpty()) {
+                                ImageView imageView = view.findViewById(R.id.imageView5);
+                                imageView.setImageURI(Uri.parse(imageUrl));
+                            }
                         }
                     }
                 });
@@ -94,26 +102,25 @@ public class StudentCabinet extends Fragment {
                     studentEntity = new StudentEntity();
                 }
                 // Получаем текст из EditText
-                String number = editTextEditNumber.getText().toString();
-                String password = editTextEditPassword.getText().toString();
+                String email = editTextEditEmail.getText().toString();
                 String name = editTextEditName.getText().toString();
                 String grade = editTextEditGrade.getText().toString();
                 String city = editTextEditCity.getText().toString();
 
                 // Обновляем данные объекта StudentEntity
-                studentEntity.setNumber(number);
-                studentEntity.setPassword(password);
+                studentEntity.setEmail(email);
                 studentEntity.setName(name);
                 studentEntity.setGrade(grade);
                 studentEntity.setCity(city);
                 Uri imageUri = getImageUri();
                 if (imageUri != null) {
-                    // Сохраняем URI изображения в объекте StudentEntity
-                    studentEntity.setImageUri(imageUri.toString());
+                    uploadImageToFirebase(imageUri);
+                } else {
+                    saveStudentData();
                 }
 
                 // Проверяем, видимы ли сейчас EditText
-                if (editTextEditNumber.getVisibility() == View.VISIBLE) {
+                if (editTextEditEmail.getVisibility() == View.VISIBLE) {
                     // Если EditText видим, скрываем его и показываем TextView
                     hideEditTextAndShowTextView();
                 }
@@ -129,7 +136,6 @@ public class StudentCabinet extends Fragment {
                 // Вызов метода для выбора изображения из галереи
                 pickImageFromGallery();
             }
-
         });
         button_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,7 +153,6 @@ public class StudentCabinet extends Fragment {
             }
         });
 
-
         // Настройка обработчика для кнопки "Изменить видимость"
         button_change.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -159,15 +164,52 @@ public class StudentCabinet extends Fragment {
         return view;
     }
 
+    private void uploadImageToFirebase(Uri imageUri) {
+        String userId = mAuth.getCurrentUser().getUid();
+        StorageReference imageRef = storageRef.child("images/" + userId + "/profile.jpg");
+        imageRef.putFile(imageUri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                studentEntity.setImageUri(uri.toString());
+                                saveStudentData();
+                            }
+                        });
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getContext(), "Ошибка загрузки изображения", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void saveStudentData() {
+        String userId = mAuth.getCurrentUser().getUid();
+        db.collection("students").document(userId).set(studentEntity)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(getContext(), "Данные успешно сохранены", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getContext(), "Ошибка при сохранении данных", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
     // Метод для переключения видимости полей
     private void toggleVisibility() {
-        textViewEditNumber.setVisibility(View.GONE);
-        editTextEditNumber.setVisibility(View.VISIBLE);
-        editTextEditNumber.setText(textViewEditNumber.getText());
-
-        textViewEditPassword.setVisibility(View.GONE);
-        editTextEditPassword.setVisibility(View.VISIBLE);
-        editTextEditPassword.setText(textViewEditPassword.getText());
+        textViewEditEmail.setVisibility(View.GONE);
+        editTextEditEmail.setVisibility(View.VISIBLE);
+        editTextEditEmail.setText(textViewEditEmail.getText());
 
         textViewEditName.setVisibility(View.GONE);
         editTextEditName.setVisibility(View.VISIBLE);
@@ -181,14 +223,11 @@ public class StudentCabinet extends Fragment {
         editTextEditCity.setVisibility(View.VISIBLE);
         editTextEditCity.setText(textViewEditCity.getText());
     }
-    private void hideEditTextAndShowTextView() {
-        editTextEditNumber.setVisibility(View.GONE);
-        textViewEditNumber.setVisibility(View.VISIBLE);
-        textViewEditNumber.setText(editTextEditNumber.getText());
 
-        editTextEditPassword.setVisibility(View.GONE);
-        textViewEditPassword.setVisibility(View.VISIBLE);
-        textViewEditPassword.setText(editTextEditPassword.getText());
+    private void hideEditTextAndShowTextView() {
+        editTextEditEmail.setVisibility(View.GONE);
+        textViewEditEmail.setVisibility(View.VISIBLE);
+        textViewEditEmail.setText(editTextEditEmail.getText());
 
         editTextEditName.setVisibility(View.GONE);
         textViewEditName.setVisibility(View.VISIBLE);
@@ -205,7 +244,6 @@ public class StudentCabinet extends Fragment {
 
     // Метод для выбора изображения из галереи
     private void pickImageFromGallery() {
-        // Создание намерения для выбора изображения из галереи
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
         startActivityForResult(intent, PICK_IMAGE_REQUEST);
@@ -223,6 +261,7 @@ public class StudentCabinet extends Fragment {
             imageView.setImageURI(selectedImageUri);
         }
     }
+
     // Метод для получения URI выбранного изображения из результата выбора из галереи
     private Uri getImageUri() {
         if (getContext() != null && getActivity() != null) {
@@ -234,3 +273,4 @@ public class StudentCabinet extends Fragment {
         return null;
     }
 }
+
