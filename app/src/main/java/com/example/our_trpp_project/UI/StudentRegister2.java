@@ -1,7 +1,10 @@
 package com.example.our_trpp_project.UI;
 
+import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -13,23 +16,30 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.our_trpp_project.R;
 import com.example.our_trpp_project.Repository.Repository;
 import com.example.our_trpp_project.Student.Data.StudentEntity;
-import com.example.our_trpp_project.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
-/** The StudentRegister2 class contains input fields and a button. */
 public class StudentRegister2 extends Fragment {
     private StudentEntity studentEntity;
-
     private FirebaseFirestore db;
     private FirebaseAuth mAuth;
+    private StorageReference storageRef;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         studentEntity = new StudentEntity();
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+        storageRef = FirebaseStorage.getInstance().getReference();
     }
 
     @Override
@@ -41,8 +51,6 @@ public class StudentRegister2 extends Fragment {
         EditText editTextName = view.findViewById(R.id.editTextText);
         EditText editTextGrade = view.findViewById(R.id.editTextText2);
         EditText editTextCity = view.findViewById(R.id.editTextText3);
-        //Новое
-        Repository repository = new Repository();
 
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,21 +74,56 @@ public class StudentRegister2 extends Fragment {
                         studentEntity.setName(Name);
                         studentEntity.setGrade(Grade);
                         studentEntity.setCity(City);
-                        // Помещаем обновленный объект студента в Bundle
-                        bundle.putSerializable("StudentInfo", studentEntity);
-                        // Помещаем в db
-                        repository.saveUserToDatabase(Name,Grade, City, getContext());
-                    }
+                        String imageUri = "android.resource://" + getContext().getPackageName() + "/" + R.drawable.ava2;
+                        studentEntity.setImageUri(imageUri);
 
-                    // Передаем обновленные данные в следующий фрагмент
-                    Navigation.findNavController(view).navigate(R.id.action_studentRegister2_to_studentMain1, bundle);
+                        // Сохраняем данные студента в Firestore
+                        saveStudentData(studentEntity, bundle, view);
+                    }
                 }
             }
         });
 
-
-
         return view;
     }
 
+    private void saveStudentData(StudentEntity studentEntity, Bundle bundle, View view) {
+        String userId = mAuth.getCurrentUser().getUid();
+        db.collection("students").document(userId).set(studentEntity)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(getContext(), "Данные успешно сохранены", Toast.LENGTH_SHORT).show();
+                        bundle.putSerializable("StudentInfo", studentEntity);
+                        Navigation.findNavController(view).navigate(R.id.action_studentRegister2_to_studentMain1, bundle);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getContext(), "Ошибка при сохранении данных", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+
+    private void saveStudentToDatabase(StudentEntity studentEntity, Bundle bundle, View view) {
+        String userId = mAuth.getCurrentUser().getUid();
+        db.collection("students").document(userId).set(studentEntity)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        // Помещаем обновленный объект студента в Bundle
+                        bundle.putSerializable("StudentInfo", studentEntity);
+                        // Передаем обновленные данные в следующий фрагмент
+                        Navigation.findNavController(view).navigate(R.id.action_studentRegister2_to_studentMain1, bundle);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getContext(), "Ошибка при сохранении данных", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
 }

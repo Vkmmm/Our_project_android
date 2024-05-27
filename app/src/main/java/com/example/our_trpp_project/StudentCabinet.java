@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.our_trpp_project.Student.Data.StudentEntity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -83,7 +85,8 @@ public class StudentCabinet extends Fragment {
                             textViewEditCity.setText(city);
                             if (imageUrl != null && !imageUrl.isEmpty()) {
                                 ImageView imageView = view.findViewById(R.id.imageView5);
-                                imageView.setImageURI(Uri.parse(imageUrl));
+                                // Использование Glide для загрузки изображения
+                                Glide.with(StudentCabinet.this).load(imageUrl).into(imageView);
                             }
                         }
                     }
@@ -112,9 +115,8 @@ public class StudentCabinet extends Fragment {
                 studentEntity.setName(name);
                 studentEntity.setGrade(grade);
                 studentEntity.setCity(city);
-                Uri imageUri = getImageUri();
-                if (imageUri != null) {
-                    uploadImageToFirebase(imageUri);
+                if (selectedImageUri != null) {
+                    uploadImageToFirebase(selectedImageUri);
                 } else {
                     saveStudentData();
                 }
@@ -142,11 +144,8 @@ public class StudentCabinet extends Fragment {
             public void onClick(View v) {
                 // Создание нового Bundle
                 Bundle bundle = new Bundle();
-
-                // Если выбрано изображение, добавляем его URI в Bundle
-                if (selectedImageUri != null) {
-                    bundle.putString("ImageUri", selectedImageUri.toString());
-                }
+                // Добавляем все поля студента в bundle
+                bundle.putSerializable("StudentInfo", studentEntity);
 
                 // Переход на предыдущий фрагмент (StudentMain1) с передачей Bundle
                 Navigation.findNavController(view).navigate(R.id.action_studentCabinet_to_studentMain1, bundle);
@@ -167,6 +166,7 @@ public class StudentCabinet extends Fragment {
     private void uploadImageToFirebase(Uri imageUri) {
         String userId = mAuth.getCurrentUser().getUid();
         StorageReference imageRef = storageRef.child("images/" + userId + "/profile.jpg");
+
         imageRef.putFile(imageUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
@@ -174,8 +174,14 @@ public class StudentCabinet extends Fragment {
                         imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
+                                Log.d("ImageUpload", "Image URL: " + uri.toString());
                                 studentEntity.setImageUri(uri.toString());
                                 saveStudentData();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getContext(), "Ошибка получения URL изображения: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
@@ -183,10 +189,11 @@ public class StudentCabinet extends Fragment {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getContext(), "Ошибка загрузки изображения", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Ошибка загрузки изображения: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }
+
 
     private void saveStudentData() {
         String userId = mAuth.getCurrentUser().getUid();
@@ -200,7 +207,7 @@ public class StudentCabinet extends Fragment {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getContext(), "Ошибка при сохранении данных", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Ошибка при сохранении данных: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -273,4 +280,5 @@ public class StudentCabinet extends Fragment {
         return null;
     }
 }
+
 

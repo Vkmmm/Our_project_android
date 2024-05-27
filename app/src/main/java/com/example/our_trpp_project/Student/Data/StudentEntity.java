@@ -9,16 +9,20 @@ public class StudentEntity implements Serializable {
     private String grade;
     private String imageUri;
 
+    // Конструктор без параметров
     public StudentEntity() {
     }
 
+    // Конструктор с 4 параметрами
     public StudentEntity(String email, String name, String city, String grade) {
         this.email = email;
         this.name = name;
         this.city = city;
         this.grade = grade;
+        this.imageUri = "";
     }
 
+    // Конструктор с 5 параметрами
     public StudentEntity(String email, String name, String city, String grade, String imageUri) {
         this.email = email;
         this.name = name;
@@ -27,8 +31,7 @@ public class StudentEntity implements Serializable {
         this.imageUri = imageUri;
     }
 
-    // Геттеры и сеттеры для всех полей
-
+    // Геттеры и сеттеры
     public String getEmail() {
         return email;
     }
