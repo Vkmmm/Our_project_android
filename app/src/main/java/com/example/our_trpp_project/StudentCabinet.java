@@ -234,4 +234,3 @@ public class StudentCabinet extends Fragment {
         return null;
     }
 }
-
